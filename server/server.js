@@ -1,3 +1,4 @@
+const client = require("./tmi-client");
 const path = require("path");
 const express = require("express");
 const app = express();
@@ -18,6 +19,13 @@ io.on("connection", function (socket) {
     console.log("client emitted!");
     io.emit("new-command", "someone said hello!");
   });
+});
+
+client.on("message", (channel, tags, message, self) => {
+  if (self) return;
+  if (message.toLowerCase() === "!hello") {
+    io.emit("new-command", "someone said hello!");
+  }
 });
 
 http.listen(PORT, () => {

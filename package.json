@@ -22,10 +22,12 @@
   },
   "scripts": {
     "start-client": "react-scripts start",
+    "start-server": "cd server && npm run dev",
     "build": "react-scripts build && (cd server && npm install)",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start": "cd server && npm start"
+    "start": "cd server && npm start",
+    "dev": "concurrently \"npm run start-client\" \"npm run start-server\""
   },
   "eslintConfig": {
     "extends": [
@@ -45,5 +47,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://andoubot-server.herokuapp.com/"
+  "proxy": "https://andoubot-server.herokuapp.com/",
+  "devDependencies": {
+    "concurrently": "^6.0.0"
+  }
 }
