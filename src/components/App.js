@@ -1,21 +1,15 @@
+import { useState } from "react";
 import "normalize.css";
-import { Helmet } from "react-helmet";
 import styles from "../styles/App.module.scss";
 import AndouGatchi from "./AndouGatchi";
+import ChromaKey from "./ChromaKey";
 
 function App() {
+  const [bgColor, setBgColor] = useState("#FFFFFF");
   return (
-    <div className={styles.App}>
-      <Helmet
-        script={[
-          {
-            type: "text/javascript",
-            src: "/socket.io/socket.io.js",
-          },
-        ]}
-      />
-
+    <div style={{ backgroundColor: bgColor }} className={styles.App}>
       <AndouGatchi />
+      <ChromaKey bgColor={bgColor} setBgColor={setBgColor} />
     </div>
   );
 }
