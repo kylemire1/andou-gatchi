@@ -1,17 +1,45 @@
 .GatchiWrapper {
-  background-color: pink;
-  height: 300px;
-  width: 225px;
-  border: solid 5px hotpink;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  background-color: #fcabc4;
+  height: 300px;
+  width: 225px;
+  border: solid 7px #770e26;
+  border-radius: 50%;
 }
 
 .GatchiScreen {
-  background-color: pink;
-  border: solid 5px hotpink;
-  width: 60%;
-  height: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fa8aac;
+  border: solid 7px #770e26;
+  border-radius: 7px;
+  width: 75%;
+  height: 50%;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+.GatchiButtons {
+  display: flex;
+  justify-content: space-between;
+  div {
+    background-color: #fa8aac;
+    border: solid 5px #770e26;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+  }
+
+  div + div {
+    margin-left: 0.5rem;
+  }
+
+  div:nth-child(2) {
+    margin-top: 1rem;
+  }
 }
