@@ -10,8 +10,7 @@ import styles from "../styles/AndouGatchi.module.scss";
 import Andou from "./Andou";
 import HealthBar from "./HealthBar";
 
-// const socket = io("https://andoubot-server.herokuapp.com/");
-const socket = io("http://localhost:4000");
+const socket = io("https://andoubot-server.herokuapp.com/");
 
 const AndouGatchi = () => {
   const [{ currentState, health, donors }, dispatch] = useContext(
