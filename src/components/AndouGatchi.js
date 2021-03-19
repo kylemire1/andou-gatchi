@@ -27,8 +27,13 @@ const AndouGatchi = () => {
       }
     });
 
-    socket.on("cheer", (data) => {
-      console.log({ data });
+    socket.on("cheer", ({ bits, username }) => {
+      if (!donors.includes[username] && +bits >= 100) {
+        bitFeed(username, +bits);
+        socket.emit("do-thank", username);
+      } else if (donors.includes[username]) {
+        socket.emit("dont-thank", username);
+      }
     });
 
     return () => socket.off();
@@ -48,22 +53,29 @@ const AndouGatchi = () => {
     feedAndReset(1, username);
   };
 
+  const bitFeed = (username, bits) => {
+    if (currentState === "full") {
+      return;
+    }
+
+    const feedAmount = Math.floor(bits / 100) * 2;
+
+    feedAndReset(feedAmount, username);
+  };
+
   const feedAndReset = (amount, username) => {
     dispatch(feed(amount, username));
     setTimeout(() => {
       dispatch(returnToIdle());
-    }, 2000);
+    }, 3000);
   };
 
-  const displayHealth = health > 100 ? 100 : health;
+  // const displayHealth = health > 100 ? 100 : health;
 
   return (
     <div>
       <div className={styles.GatchiWrapper}>
-        <div className={styles.GatchiScreen}>
-          <div>State: {currentState}</div>
-          <div>Health: {displayHealth}</div>
-        </div>
+        <div className={styles.GatchiScreen}></div>
         <div className={styles.GatchiButtons}>
           <div />
           <div />
