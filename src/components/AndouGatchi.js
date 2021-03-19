@@ -8,7 +8,7 @@ import {
 import GatchiContext from "../contexts/GatchiContext";
 import styles from "../styles/AndouGatchi.module.scss";
 
-const socket = io(process.env.API_URL || "http://localhost:4000");
+const socket = io("https://andoubot-server.herokuapp.com/");
 
 const AndouGatchi = () => {
   const [{ currentState, health, donors }, dispatch] = useContext(
