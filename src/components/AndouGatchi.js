@@ -8,7 +8,6 @@ import {
 import GatchiContext from "../contexts/GatchiContext";
 import styles from "../styles/AndouGatchi.module.scss";
 import Andou from "./Andou";
-import DecorativeButtons from "./DecorativeButtons";
 import HealthBar from "./HealthBar";
 
 // const socket = io("https://andoubot-server.herokuapp.com/");
@@ -34,9 +33,11 @@ const AndouGatchi = () => {
     socket.on("cheer", ({ bits, username }) => {
       if (!donors.includes[username] && +bits >= 100) {
         bitFeed(username, +bits);
-        socket.emit("do-thank", username);
+        socket.emit("bits-food", { username, bits });
       } else if (donors.includes[username]) {
-        socket.emit("dont-thank", username);
+        socket.emit("bits-already-fed", { username, bits });
+      } else {
+        socket.emit("bits-no-food", { username, bits });
       }
     });
 
@@ -81,7 +82,6 @@ const AndouGatchi = () => {
           <Andou currentState={currentState} />
           <HealthBar health={health} />
         </div>
-        <DecorativeButtons />
       </div>
     </div>
   );
