@@ -7,8 +7,12 @@ import {
 } from "../contexts/actions/gatchiContextActions";
 import GatchiContext from "../contexts/GatchiContext";
 import styles from "../styles/AndouGatchi.module.scss";
+import Andou from "./Andou";
+import DecorativeButtons from "./DecorativeButtons";
+import HealthBar from "./HealthBar";
 
-const socket = io("https://andoubot-server.herokuapp.com/");
+// const socket = io("https://andoubot-server.herokuapp.com/");
+const socket = io("http://localhost:4000");
 
 const AndouGatchi = () => {
   const [{ currentState, health, donors }, dispatch] = useContext(
@@ -67,22 +71,18 @@ const AndouGatchi = () => {
     dispatch(feed(amount, username));
     setTimeout(() => {
       dispatch(returnToIdle());
-    }, 3000);
+    }, 5000);
   };
-
-  // const displayHealth = health > 100 ? 100 : health;
 
   return (
     <div>
       <div className={styles.GatchiWrapper}>
-        <div className={styles.GatchiScreen}></div>
-        <div className={styles.GatchiButtons}>
-          <div />
-          <div />
-          <div />
+        <div className={styles.GatchiScreen}>
+          <Andou currentState={currentState} />
+          <HealthBar health={health} />
         </div>
+        <DecorativeButtons />
       </div>
-      <pre>{JSON.stringify({ currentState, health, donors }, null, 2)}</pre>
     </div>
   );
 };

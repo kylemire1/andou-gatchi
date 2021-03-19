@@ -1,0 +1,19 @@
+.DecorativeButtons {
+  display: flex;
+  justify-content: space-between;
+  div {
+    background-color: #fa8aac;
+    border: solid 5px #770e26;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+  }
+
+  div + div {
+    margin-left: 0.5rem;
+  }
+
+  div:nth-child(2) {
+    margin-top: 1rem;
+  }
+}

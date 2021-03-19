@@ -1,0 +1,30 @@
+.Healthbar {
+  position: absolute;
+  bottom: 0.25rem;
+  left: 0.25rem;
+  right: 0.25rem;
+  border: solid 2px #770e26;
+  border-radius: 5px;
+  padding: 0.15em;
+  background-color: #fcabc4;
+  overflow: hidden;
+}
+
+.HealthbarProgress {
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  color: #770e26;
+  position: relative;
+  z-index: 2;
+}
+
+.HealthbarFill {
+  background-color: white;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  border-radius: 5px;
+}
