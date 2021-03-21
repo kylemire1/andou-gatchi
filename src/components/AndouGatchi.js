@@ -30,11 +30,9 @@ const AndouGatchi = () => {
     });
 
     socket.on("cheer", ({ bits, username }) => {
-      if (!donors.includes[username] && +bits >= 100) {
+      if (+bits >= 100) {
         bitFeed(username, +bits);
         socket.emit("bits-food", { username, bits });
-      } else if (donors.includes[username]) {
-        socket.emit("bits-already-fed", { username, bits });
       } else {
         socket.emit("bits-no-food", { username, bits });
       }
