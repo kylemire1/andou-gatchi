@@ -13,15 +13,13 @@ import HealthBar from "./HealthBar";
 const socket = io("https://andoubot-server.herokuapp.com/");
 
 const AndouGatchi = () => {
-  const [{ currentState, health, donors }, dispatch] = useContext(
+  const [{ currentState, health, donors, topDonor }, dispatch] = useContext(
     GatchiContext
   );
 
   useEffect(() => {
     socket.on("command", (username) => {
-      console.log("new command from server!", { username });
-
-      if (!donors.includes(username)) {
+      if (!donors.some((donor) => donor.username === username)) {
         commandFeed(username);
         socket.emit("do-thank", username);
       } else {
@@ -35,6 +33,15 @@ const AndouGatchi = () => {
         socket.emit("bits-food", { username, bits });
       } else {
         socket.emit("bits-no-food", { username, bits });
+      }
+    });
+
+    socket.on("most-love", () => {
+      if (topDonor) {
+        socket.emit("most-love-winner", {
+          username: topDonor.username,
+          amount: topDonor.amount,
+        });
       }
     });
 
